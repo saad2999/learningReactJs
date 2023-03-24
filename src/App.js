@@ -1,56 +1,32 @@
-import './App.css';
-import Header from './components/Header';
-import Person from './components/Person';
-import Form from './components/Form';
+import React, { Component } from 'react'
+import Greet from './components/Greet'
+import Register from './components/Register';
 
-
-
-import React, { Component } from 'react';
-
-class App extends Component {
-  constructor(props){   
+ class App extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      persons: [
-        {name: "John", age: 23},
-        {name: "Jane", age: 24},
-        {name: "Jack", age: 25} 
-
-      ],
-      isShow: false,
-    }
-  };
-  Togglehandler = this.Togglehandler.bind(this);
-  
-   Togglehandler()
-  {
-    this.setState({
-      isShow: !this.state.isShow
-    })
+      name:null,
+      password:null,
+      email:null,
+      isRegistered: false
   }
-  removehandler=(personindex)=>{
-    let personCopy=this.state.persons;
-    personCopy.splice(personindex,1)
-    this.setState({persons:personCopy});
-  };
+};
+  RegisterHandler = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const password = event.target.password.value;
+    const email = event.target.email.value;
+    this.setState({name, email,password, isRegistered: true})
+  }
+  
   render() {
-    // let persons;
-    //     persons = this.state.persons.map((p,index) => {
-    //   return <Person key={index} name={p.name} age={p.age} remove={()=>this.removehandler(index)} />;
-    // });  
-    return <div className="App">
-     {/* <button onClick={this.Togglehandler}> Toggle </button> */}
-      {
-        // this.state.isShow ? persons : null
-        <Form/>
-      }
-       </div>   
-    
-
-    
+    return (
+      <div>
+        {this.state.isRegistered ? <Greet name={this.state.name} email={this.state.email}/> : <Register submit={this.RegisterHandler}  />}    
+       </div>
+    )
   }
 }
 
-export default App;
-
-
+export default App
