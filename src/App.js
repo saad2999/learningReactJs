@@ -9,7 +9,8 @@ import Register from './components/Register';
       name:null,
       password:null,
       email:null,
-      isRegistered: false
+      isRegistered: false,
+      showPassword: false
   }
 };
   RegisterHandler = (event) => {
@@ -19,11 +20,15 @@ import Register from './components/Register';
     const email = event.target.email.value;
     this.setState({name, email,password, isRegistered: true})
   }
-  
+  showPasswordHandler = () => {
+    this.setState({showPassword:!this.state.showPassword})
+
+
+  }
   render() {
     return (
       <div>
-        {this.state.isRegistered ? <Greet name={this.state.name} email={this.state.email}/> : <Register submit={this.RegisterHandler}  />}    
+        {this.state.isRegistered ? <Greet name={this.state.name} email={this.state.email}/> : <Register submit={this.RegisterHandler} showPassword={this.state.showPassword} click={this.showPasswordHandler} />}    
        </div>
     )
   }

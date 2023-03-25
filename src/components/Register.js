@@ -1,6 +1,24 @@
 import React from 'react'
 
 function Register(props) {
+  
+  
+  let btnText;
+  let PasswordBoxType;
+  let btnClasses=["btn","m-4"]
+  if(props.showPassword===true){
+    btnClasses.push("btn-danger")
+    btnText="Hide Password";
+    PasswordBoxType="text";
+    
+  }
+  else
+  {
+    btnText="Show Password";
+    PasswordBoxType="password"
+    btnClasses.push("btn-success")
+  }
+
   return (
     <div className='container p-3 card mt-4'>
       <form onSubmit={props.submit}>
@@ -15,9 +33,10 @@ function Register(props) {
         </div>
         <div className='form-group'  >
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" required className='form-control' />
+          <input type={PasswordBoxType} name="password" required className='form-control' />
         </div>
         <button type='submit' className='btn btn-primary'>Register</button>
+        <button type="button" class={btnClasses.join(" ")} onClick={props.click}>{btnText}</button>
       </form>
     </div>
   )
