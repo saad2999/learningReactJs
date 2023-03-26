@@ -21,6 +21,7 @@ import Register from './components/Register';
     this.setState({name, email,password, isRegistered: true})
   }
   showPasswordHandler = () => {
+   
     this.setState({showPassword:!this.state.showPassword})
 
 

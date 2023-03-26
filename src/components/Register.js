@@ -20,17 +20,28 @@ function Register(props) {
     btnClasses.push("btn-success")
   }
   let StyledButton = styled.button`
-  display: block;
+  display:  ${(props) => (props.flag==="1"? "inline-block":"block")};
   padding: 10px, 5px;
-  background-color: orange;
+  background-color: ${(props) => props.color};
   color:white
   border: none;
-  width: 100%;
+  width: ${(props) => (props.flag==="1"? "45%":"100%")};
   margin: 5px;
+  boarder-radius:5px
   `;
+  let StyledContainer=styled.section`
+  width 500px;
+  &:hover {
+    box-shadow: 0px 0px 5px grey;
+
+  }
+  @media (min-width:0px) and (max-width:500px) {
+    width : 300px;
+  }
+  `
 
   return (
-    <div className='container p-3 card mt-4'>
+    <StyledContainer className='container p-3 card mt-4'>
       <form onSubmit={props.submit}>
         <h1 className='text-center'>Registration form</h1>
         <div className='form-group'  >
@@ -47,9 +58,10 @@ function Register(props) {
         </div>
         <button type='submit' className='btn btn-primary'>Register</button>
         <button type="button" class={btnClasses.join(" ")} onClick={props.click}>{btnText}</button>
-        <StyledButton type="button">login</StyledButton>
+        <StyledButton type="button" color="orange" flag="1">login</StyledButton>
+        <StyledButton type="button" color="red" flag="0">login with google</StyledButton>
       </form>
-    </div>
+    </StyledContainer>
   )
 }
 
